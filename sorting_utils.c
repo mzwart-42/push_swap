@@ -1,12 +1,25 @@
 #include "push_swap.h"
 
+int	consecutive_nodes_in_range(t_stack *stack, int lower, int upper)
+{
+	t_node	*traverse;
+	int		counter;
+
+	counter = 0;
+	traverse = stack->top;
+	while (traverse && traverse->value >= lower && traverse->value <= upper)
+	{
+		traverse = traverse->next;
+		++counter;
+	}
+	return (counter);
+}
+
 int	unrotate_nodes(t_stack *stack, int lower , int upper)
 {
-	int	bottom_val;
 	int	counter;
 
 	counter = 0;
-	bottom_val = stack->bottom->value;
 	while (stack->bottom && stack->bottom->value >= lower && stack->bottom->value <= upper)
 	{
 		reverse_rotate(stack);
@@ -15,39 +28,51 @@ int	unrotate_nodes(t_stack *stack, int lower , int upper)
 	return (counter);
 }
 
-int	ordered_ascending(t_stack *stack, int lower)
+int	lst_sequantial_nodes(t_node *lst, int start, int end, int step_size)
 {
-	t_node	*lst;
-	int	ordered_nodes;
+	int	sequantial_nodes;
 
-	if (stack->top == NULL)
-		return (0);
-	lst = stack->top;
-	ordered_nodes = 0;
-	while(lst && lst->value == lower)
+	sequantial_nodes = 0;
+	while(lst && lst->value == start)
 	{
+		if (start == end)
+			return (true);
 		lst = lst->next;
-		ordered_nodes++;
-		lower++;
+		start += step_size;
 	}
-	return (ordered_nodes);
+	return (false);
+
 }
 
-int	ordered_descending(t_stack *stack, int upper)
+int	ordered_ascending(t_node *lst, int start, int end)
 {
-	t_node	*lst;
 	int	ordered_nodes;
 
-	if (stack->top == NULL)
-		return (0);
-	lst = stack->top;
 	ordered_nodes = 0;
-	while(lst && lst->value == upper)
+	while(lst && lst->value == start)
 	{
+		if (start == end)
+			return (ordered_nodes);
 		lst = lst->next;
-		ordered_nodes++;
-		upper--;
+		++ordered_nodes;
+		++start;
 	}
-	return (ordered_nodes);
+	return (0);
+}
+
+int	ordered_descending(t_node *lst, int start, int end)
+{
+	int ordered_nodes;
+
+	ordered_nodes = 0;
+	while(lst && lst->value == start)
+	{
+		if (start == end)
+			return (ordered_nodes);
+		lst = lst->next;
+		++ordered_nodes;
+		start--;
+	}
+	return (0);
 }
 

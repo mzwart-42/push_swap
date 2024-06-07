@@ -1,28 +1,43 @@
 SRC = main.c \
 	stack_logic.c \
+	lst_logic.c \
 	map_indexes.c \
 	push_swap_operations.c \
 	sort_subset.c \
 	sorting_utils.c \
 	sorting.c \
-	queue.c
+	split_median.c \
+	parse.c \
+	queue.c \
+	split.c
 
 
 CC = cc
-#CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -Wno-unused-variable
 OUTPUT = hi
 
-ARG = ${arg}
-ifeq ($(ARG),) # if arg is empty
-	ARG = 670 5593 4305 3569 1116 9828 1506 8616 34 324 234 2424 123 12 1
+# export ARG=" ... " to set a default input for make run
+# or specify ARGS on the command line, like in the subject
+ARGS = ${ARG}
+ifeq ($(ARGS),) 
+	ARGS = 5 4 3 2 1
 endif
 
-OUTPUT_EXEC = a.out
+OUTPUT_EXEC = push_swap
 
 all:
 	cc $(CFLAGS) $(SRC) -g -o $(OUTPUT_EXEC)
-	./$(OUTPUT_EXEC) $(ARG)
+
+run: $(OUTPUT_EXEC)
+	./push_swap $(ARGS) | tee operations ; wc -l operations && printf "input:\n$(ARGS)" >> operations
+
+debug: $(OUTPUT_EXEC)
+	gdb -q --args $(OUTPUT_EXEC) $(ARGS)
+
+re: fclean all	
 
 
 fclean:
-	rm $(OUTPUT_EXEC)
+	-rm $(OUTPUT_EXEC)
+
+.PHONY: clean fclean

@@ -56,25 +56,25 @@ ssize_t	lst_search_len(t_node *lst, int searched_int)
 	return (-1);
 }
 
-t_node	*lst_map_values_to_indexes(t_node *lst)
+t_node	*lst_map_values_to_indexes(t_node *lst_to_be_mapped)
 {
 	t_node	*set;
-	t_node	*traverse_lst;
+	t_node	*unmapped_lst;
 	size_t	set_index;
 
-	set = create_ordered_set(lst);
+	set = create_ordered_set(lst_to_be_mapped);
 	if (!set)
 	{
-		lst_clear(&lst);
-		return (NULL);
+		lst_clear(&lst_to_be_mapped);
+		error_exit();
 	}
-	traverse_lst = lst;
-	while (traverse_lst != NULL)
+	unmapped_lst = lst_to_be_mapped;
+	while (unmapped_lst != NULL)
 	{
-		set_index = lst_search_len(set, traverse_lst->value);
-		traverse_lst->value = set_index + 1;
-		traverse_lst = traverse_lst->next;
+		set_index = lst_search_len(set, unmapped_lst->value);
+		unmapped_lst->value = set_index + 1;
+		unmapped_lst = unmapped_lst->next;
 	}
 	lst_clear(&set);
-	return (lst);
+	return (lst_to_be_mapped);
 }

@@ -33,21 +33,6 @@ t_node	*pop(t_stack *stack)
 	return (popped_node);
 }
 
-void	lst_clear(t_node **lst)
-{
-	t_node	*current_node;
-	t_node	*tmp_for_free;
-
-	current_node = *lst;
-	while (current_node != NULL)
-	{
-		tmp_for_free = current_node;
-		current_node = (current_node)->next;
-		free(tmp_for_free);
-	}
-	*lst = NULL;
-}
-
 int	stack_height(t_stack *stack)
 {
 	int		height;
@@ -62,32 +47,6 @@ int	stack_height(t_stack *stack)
 	}
 	return (height);
 }
-
-int	lst_len(t_node *lst)
-{
-	int	height;
-	t_node	*traverse;
-
-	height = 0;
-	traverse = lst;
-	while (traverse)
-	{
-		traverse = traverse->next;
-		height++;
-	}
-	return (height);
-}
-
-void	print_lst(t_node	*lst)
-{
-	while (lst != NULL)	
-	{
-		printf(" %i -", lst->value);
-		lst = lst->next;
-	}
-	printf(">\n");
-}
-	
 
 void	print_two_stacks(const t_stack *first_stack, const t_stack *second_stack)
 {
