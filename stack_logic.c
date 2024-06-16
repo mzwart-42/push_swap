@@ -1,18 +1,6 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-t_node	*create_node(int value)
-{
-	t_node	*new_node;
-
-	new_node = malloc(sizeof(t_node));
-	if (!new_node)
-		return (NULL);
-	new_node->value = value;
-	new_node->next = NULL;
-	return (new_node);
-}
-
 void	push(t_stack *stack, t_node *pushed_node)
 {
 	if (!stack->top)
@@ -47,6 +35,17 @@ int	stack_height(t_stack *stack)
 	}
 	return (height);
 }
+
+void	print_lst(t_node	*lst)
+{
+	while (lst != NULL)	
+	{
+		printf(" %i -", lst->value);
+		lst = lst->next;
+	}
+	printf(">\n");
+}
+
 
 void	print_two_stacks(const t_stack *first_stack, const t_stack *second_stack)
 {

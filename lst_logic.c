@@ -35,16 +35,6 @@ int	lst_len(t_node *lst)
 	return (height);
 }
 
-void	print_lst(t_node	*lst)
-{
-	while (lst != NULL)	
-	{
-		printf(" %i -", lst->value);
-		lst = lst->next;
-	}
-	printf(">\n");
-}
-
 void	lst_clear(t_node **lst)
 {
 	t_node	*current_node;
@@ -58,5 +48,17 @@ void	lst_clear(t_node **lst)
 		free(tmp_for_free);
 	}
 	*lst = NULL;
+}
+
+t_node	*create_node(int value)
+{
+	t_node	*new_node;
+
+	new_node = malloc(sizeof(t_node));
+	if (!new_node)
+		return (NULL);
+	new_node->value = value;
+	new_node->next = NULL;
+	return (new_node);
 }
 

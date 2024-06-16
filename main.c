@@ -27,8 +27,8 @@ void	init_stacks(t_stack *a, t_stack *b, t_queue *ops)
 
 int main(int argc, char **argv)
 {
-	t_stack	a;
-	t_stack	b;
+	t_stack		a;
+	t_stack		b;
 	t_queue 	ops;
 	char		**new_argv;
 	int		height;
@@ -42,9 +42,9 @@ int main(int argc, char **argv)
 		push_cmd_args_on_stack(argc - 1, argv + 1, &a);
 	}	
 	lst_map_values_to_indexes(a.top);
-	sort_stack(&a, &b);	
+	sort_stack(&a, &b);
+	//print_two_stacks(a, b);
 	print_queued_operations(&ops);
-	//flush_queue(&ops);
 	lst_clear(&a.top);
 }
 

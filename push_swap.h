@@ -1,13 +1,13 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <unistd.h>
-#include <limits.h> //??
 #include <stddef.h>
 
 // DEBUGGING
 #include <stdio.h> // remove later
 #include <assert.h> // remove later
 extern int	exec_cost;
+
 
 typedef struct s_int_list t_node;
 typedef struct s_int_list
@@ -28,12 +28,12 @@ typedef struct s_stack
 	t_stack_ref	*other_stack_to_free;
 }	t_stack;
 
-enum operations {sa, ra, rra, pa, sb, rb, rrb, pb, ss, rr, rrr};
-
+enum operations {sa, ra, rra, pb, sb, rb, rrb, pa, ss, rr, rrr};
 
 //enum e_operations {swap_, rotate_, reverse_rotate_, push_, switch_};
 
-//------- functions --------//
+//----------------------------------------------------------------------------//
+
 // main
 void	error_exit();
 
@@ -88,10 +88,11 @@ void	sort_bottom_3_descending(t_stack *stack);
 void	sort_3_ascending(t_stack *stack);
 void	sort_3_descending(t_stack *stack);
 
-
 // queue
 void	enqueue(t_queue *q, t_node *new_node);
 void	print_queued_operations(t_queue *operations);
 void	flush_queue(t_queue *q);
+void	ft_lstdel_one(t_node **head, t_node *node_to_remove);
+
 // code obfuscation ?
 #define	DEQUEUE(queue) pop(queue)

@@ -9,6 +9,7 @@ SRC = main.c \
 	split_median.c \
 	parse.c \
 	queue.c \
+	queue_utils.c \
 	split.c
 
 

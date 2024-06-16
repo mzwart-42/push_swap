@@ -17,13 +17,16 @@ int	consecutive_nodes_in_range(t_stack *stack, int lower, int upper)
 
 int	unrotate_nodes(t_stack *stack, int lower , int upper)
 {
-	int	counter;
+	const int	height = upper - lower + 1;
+	int		counter;
 
 	counter = 0;
 	while (stack->bottom && stack->bottom->value >= lower && stack->bottom->value <= upper)
 	{
 		reverse_rotate(stack);
 		counter++;
+		if (counter >= height)
+			break;
 	}
 	return (counter);
 }
@@ -36,12 +39,12 @@ int	lst_sequantial_nodes(t_node *lst, int start, int end, int step_size)
 	while(lst && lst->value == start)
 	{
 		if (start == end)
-			return (true);
+			return (sequantial_nodes);
 		lst = lst->next;
 		start += step_size;
+		++sequantial_nodes;
 	}
-	return (false);
-
+	return (0);
 }
 
 int	ordered_ascending(t_node *lst, int start, int end)
@@ -75,4 +78,3 @@ int	ordered_descending(t_node *lst, int start, int end)
 	}
 	return (0);
 }
-
